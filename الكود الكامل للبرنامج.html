@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>الكود الكامل للبرنامج</title>
+</head>
+
+<body>
+    <div class="book-page">
+        <h1 class="book-title">الكود الكامل للبرنامج</h1>
+        <div class="content">
+            <p>
+                هناك حلول كثيرة ممكنة لبناء برنامج الة بيع القهوة والطريقة التي 
+                اخترتها لبناءها هي اختيارك في النهاية وما سوف اريك الان هو واحدة من الطرق
+                المختلفة الممكنة, اريد منك ان لا تشعر ان حلك خاطئ فقط لانه مختلف 
+                عن الحل الخاص بي مادام ان النتيجة النهائية هي نفسها اذن اعتبر 
+                نفسك ناجحا.
+            </p>
+            <p>
+                هذا هو الكود الذي سوف نبدأ به: 
+            </p>
+            <pre><code>
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+            </code></pre>
+            <p>
+                لاحظ انه لدينا هذا القاموس اسمه 
+                MENU 
+                الذي يحتوي بدوره قواميس لكل نوع قهوة و اسمائها هي المفاتيح وداخلها ايضا 
+                هناك قاموس, تحت المفتاح 
+                ingredients
+                الذي يحتوي على المكونات الازمة لصنع نوع القهوة
+                والمفتاح الاخر 
+                cost 
+                يحتوي على السعر
+            </p>
+            <p>
+                هناك ايضا قاموس اخر 
+                resources 
+                الذي يحتوي على الموارد المتاحة داخل الالة
+            </p>
+            <p>
+                الان نحن جاهزون للبدأ في برمجة الالة, سابدا بسؤال المستخدم عن 
+                نوع القهوة التي يريد والسؤال عن نوع القهوة يجب ان يظهر بعد 
+                نهاية كل عملية اي انها يجب ان تكون داخل حلقة 
+                while 
+                وكبداية سوف اجعل الشرط دائما متحقق
+            </p>
+            <pre><code>
+while True:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+            </code></pre>
+            <p>
+                الان نريد ان نطفأ الالة اذا ادخل المستخدم كلمة 
+                off 
+                اي ان الحلقة سوف تنتهي لذلك سوف اضيف علم واقلب قيمته 
+                في حال اذخال الكلمة 
+                off
+            </p>
+            <pre><code>
+is_on = True
+
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+            </code></pre>
+            <p>
+                ننتقل للشيء الاخر هو عندما يدخل المستخدم كلمة 
+                report 
+                يجب ان يتم اظهار تقرير بالموارد المتاحة داخل الالة
+            </p>
+            <p>
+                لدينا موارد الالة التي تصنع منها القهوة ولكن ليس لدينا متغير يحمل
+                قيمة المال الموجودة داخل الالة اذا سوف نضيفه وقيمة الابتدائية هي 
+                0
+                ثم نتحقق من ادخال الكلمة 
+                report 
+                ونظهر التقرير
+            </p>
+            <pre><code>
+profit = 0
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+is_on = True
+
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+            </code></pre>
+            <p>
+                ننتقل الى الخطوة الموالية وهي ان نتحقق من ان الموارد كافية 
+                لصنع نوع القهوة المحدد وسوف نفعل ذلك في ال 
+                else 
+                وسوف نستعمل 
+                MENU 
+                لنحصل على نوع القهوة المختار وللان سوف نقوم بطباعته فقط
+            </p>
+            <pre><code>
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        print(drink)
+            </code></pre>
+            <p>
+                الان سوف استعمل المفتاح 
+                ingredients
+                للوصول الى المكونات من خلال الدوران عليها باستعمال حلقة واقارنها مع الموجودة داخل الالة ولكن اظن 
+                من الافضل ان تكون في دالة خاصة بها
+            </p>
+            <pre><code>
+def is_resource_sufficient(order_ingredients):
+    """Returns True when order can be made, False if ingredients are insufficient."""
+    for item in order_ingredients:
+        if order_ingredients[item] > resources[item]:
+            print(f"​Sorry there is not enough {item}.")
+            return False
+    return True
+            </code></pre>
+            <p>
+                اذن هذه الدالة سوف تقارن كل كمية مكون مع الكمية الموجودة داخل الالة 
+                فاذا كانت اكبر منها اي انها غير كافية سوف ترجع 
+                False 
+                وتنتهي الدالة اما اذا لم يتحقق الشرط وانتهت الحلقة سوف يرجع 
+                True 
+                في الاخير ومعناه ان الموارد تكفي لصناعة نوع القهوة المحدد
+            </p>
+            <p>
+                الان نناديها في ال
+                else 
+                ونمرر المكونات الخاصة بالمشروب تحت المفتاح 
+                ingredients
+                ونستعملها كشرط لعبارة 
+                if
+            </p>
+            <pre><code>
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+            
+            </code></pre>
+            <p>
+                الان اذا كانت الموراد كافية سوف ننتقل للمرحلة التالية وهي معالجة
+                الدفع والمستخدم سوف يسأل عن عدد القطع النقدية التي سوف يدخلها
+                <br>
+                quarters = $0.25
+                <br>
+                dimes = $0.10
+                <br>
+                nickles = $0.05
+                <br>
+                pennies = $0.01
+            </p>
+            <p>
+                وسوف نفعل ذلك في دالة منفصلة التي لن تأخذ اي مدخلات ولكن سوف ترجع 
+                مجموع القطع النقدية المدخلة بعد ان نسألهم ان يدخلو القطع النقدية 
+            </p>
+            <pre><code>
+def process_coins():
+    """Returns the total calculated from coins inserted."""
+    print("Please insert coins.")
+    total = int(input("how many quarters?: ")) * 0.25
+    total += int(input("how many dimes?: ")) * 0.1
+    total += int(input("how many nickles?: ")) * 0.05
+    total += int(input("how many pennies?: ")) * 0.01
+    return total
+            </code></pre>
+            <p>
+                الان دعونا نقوم بمنادات الدالة في حال كانت الموارد كافية
+            </p>
+            <pre><code>
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+            payment = process_coins()
+            </code></pre>
+            <p>
+                الان سوف ننتقل الى المرحلة التالية وهي التحقق ان كانت عملية الدفع 
+                ناجحة او لا اي انه ادخل مبلغ يكفي لشراء نوع القهوة المحدد وايضا ان كان 
+                هناك باقي يجب ارجاعه للمستخدم ايضا, ومجددا سوف نفعل ذلك في دالة خاصة بها
+            </p>
+            <pre><code>
+def is_transaction_successful(money_received, drink_cost):
+    """Return True when the payment is accepted, or False if money is insufficient."""
+    if money_received >= drink_cost:
+        change = round(money_received - drink_cost, 2)
+        print(f"Here is ${change} in change.")
+        global profit
+        profit += drink_cost
+        return True
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+            </code></pre>
+            <p>
+                هذه الدالة سوف تأخذ مدخلين مجموع القطع النقدية وسعر القهوة المختارة
+                وسوف ترجع 
+                True 
+                اذا تم قبول المال او 
+                False 
+                ان كان المال غير كافي 
+                وسوف يتم حساب الباقي وتدويره الى رقمين بعد الفاصلة وطباعته اما المال فسوف يذهب الى المتغير 
+                profit 
+                الذي هو خارج الدالة اي نطاقه عام ولنقوم باضافة له المال نستعمل 
+                الكلمة 
+                global 
+                كما راينا في دروس النطاق السابقة
+            </p>
+            <p>
+                الان نحن جاهزون لمنادات الدالة بعد ان يدخل المستخدم العملات
+            </p>
+            <pre><code>
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+            payment = process_coins()
+            if is_transaction_successful(payment, drink["cost"]):
+                
+            </code></pre>
+            <p>
+                الان وصلنا الى الجزء الاخير من بناء هذا البرنامج وهو صناعة القهوة 
+                فاذا كانت عملية الدفع ناجحة وهناك موارد كافية لصناعة القهوة 
+                اذن الوارد داخل الدالة يجب ان تنقص منها الكمية المستعملة من الموارد
+            </p>
+            <p>
+                سوف نصنع دالة اخرى تسمى 
+                make_coffee
+                ولكي نصنع القهوة يجب ان نعرف اسمها والمكونات الازمة لصنعها
+            </p>
+            <pre><code>
+def make_coffee(drink_name, order_ingredients):
+    """Deduct the required ingredients from the resources."""
+    for item in order_ingredients:
+        resources[item] -= order_ingredients[item]
+    print(f"Here is your {drink_name} ☕️. Enjoy!")
+            </code></pre>
+            <p>
+                الان تبقى منادات الدالة في حال كانت عملية الدفع ناجحة
+                وتمرير اسم القهوة والمكونات اللازمة
+            </p>
+            <pre><code>
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+            payment = process_coins()
+            if is_transaction_successful(payment, drink["cost"]):
+                make_coffee(choice, drink["ingredients"])      
+            </code></pre>
+            <p>
+                كود البرنامج كاملا: 
+            </p>
+            <pre><code>
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+profit = 0
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+
+def is_resource_sufficient(order_ingredients):
+    """Returns True when order can be made, False if ingredients are insufficient."""
+    for item in order_ingredients:
+        if order_ingredients[item] > resources[item]:
+            print(f"​Sorry there is not enough {item}.")
+            return False
+    return True
+
+
+def process_coins():
+    """Returns the total calculated from coins inserted."""
+    print("Please insert coins.")
+    total = int(input("how many quarters?: ")) * 0.25
+    total += int(input("how many dimes?: ")) * 0.1
+    total += int(input("how many nickles?: ")) * 0.05
+    total += int(input("how many pennies?: ")) * 0.01
+    return total
+
+
+def is_transaction_successful(money_received, drink_cost):
+    """Return True when the payment is accepted, or False if money is insufficient."""
+    if money_received >= drink_cost:
+        change = round(money_received - drink_cost, 2)
+        print(f"Here is ${change} in change.")
+        global profit
+        profit += drink_cost
+        return True
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+
+
+def make_coffee(drink_name, order_ingredients):
+    """Deduct the required ingredients from the resources."""
+    for item in order_ingredients:
+        resources[item] -= order_ingredients[item]
+    print(f"Here is your {drink_name} ☕️. Enjoy!")
+
+
+is_on = True
+
+while is_on:
+    choice = input("​What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+            payment = process_coins()
+            if is_transaction_successful(payment, drink["cost"]):
+                make_coffee(choice, drink["ingredients"])
+            </code></pre>
+        </div>
+    </div>
+</body>
+
+</html>
